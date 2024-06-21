@@ -15,18 +15,18 @@ const Card = ({ item }: Props) => {
           {item?.attributes.isNew && <span>New Season</span>}
           <img
             src={
-              process.env.REACT_APP_UPLOAD_URL +
+              process.env.NEXT_PUBLIC_UPLOAD_URL! +
               item.attributes?.img?.data?.attributes?.url
             }
-            alt=""
+            alt="mainImg"
             className="mainImg"
           />
           <img
             src={
-              process.env.REACT_APP_UPLOAD_URL +
-              item.attributes?.img2?.data?.attributes?.url
+              process.env.NEXT_PUBLIC_UPLOAD_URL! +
+              item.attributes?.img2?.data[0]?.attributes?.url
             }
-            alt=""
+            alt="secondImg"
             className="secondImg"
           />
         </div>

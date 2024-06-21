@@ -788,6 +788,136 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCatrgoryCatrgory extends Schema.CollectionType {
+  collectionName: 'catrgories';
+  info: {
+    singularName: 'catrgory';
+    pluralName: 'catrgories';
+    displayName: 'catrgory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    desc: Attribute.Text;
+    img: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    products: Attribute.Relation<
+      'api::catrgory.catrgory',
+      'manyToMany',
+      'api::product.product'
+    >;
+    sub_categories: Attribute.Relation<
+      'api::catrgory.catrgory',
+      'manyToMany',
+      'api::sub-category.sub-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::catrgory.catrgory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::catrgory.catrgory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'product';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    desc: Attribute.Text;
+    img: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    img2: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    price: Attribute.Decimal;
+    isNew: Attribute.Boolean & Attribute.DefaultTo<false>;
+    catrgories: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::catrgory.catrgory'
+    >;
+    sub_categories: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::sub-category.sub-category'
+    >;
+    type: Attribute.Enumeration<['normal', 'featured', 'trending']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubCategorySubCategory extends Schema.CollectionType {
+  collectionName: 'sub_categories';
+  info: {
+    singularName: 'sub-category';
+    pluralName: 'sub-categories';
+    displayName: 'subCategory';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    products: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'manyToMany',
+      'api::product.product'
+    >;
+    catrgories: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'manyToMany',
+      'api::catrgory.catrgory'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +936,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::catrgory.catrgory': ApiCatrgoryCatrgory;
+      'api::product.product': ApiProductProduct;
+      'api::sub-category.sub-category': ApiSubCategorySubCategory;
     }
   }
 }

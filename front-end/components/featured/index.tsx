@@ -2,20 +2,16 @@
 
 import "./index.scss";
 import Card from "../card";
-// import useFetch from "../../hooks/useFetch";
+import useFetch from "@/hooks/use-fetch";
 
 type Props = {
   type: string;
 };
 
 const FeaturedProducts = ({ type }: Props) => {
-  //   const { data, loading, error } = useFetch(
-  //     `/products?populate=*&[filters][type][$eq]=${type}`
-  //   );
-
-  const data: any = [];
-  const error = null;
-  const loading = false;
+  const { data, loading, error } = useFetch(
+    `/products?populate=*&[filters][type][$eq]=${type}`
+  );
 
   return (
     <div className="featuredProducts">

@@ -1,28 +1,26 @@
 "use client";
 
 import { useState } from "react";
-// import List from "../../components/List/List";
-// import useFetch from "../../hooks/useFetch";
 import "./index.scss";
 import List from "../list";
+import useFetch from "@/hooks/use-fetch";
 
 type Props = {
   id: string;
 };
 
 const Products = ({ id }: Props) => {
-  //   const catId = parseInt(useParams().id);
-  const catId = "test";
+  const catId = parseInt(id);
 
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sort, setSort] = useState(null);
   const [selectedSubCats, setSelectedSubCats] = useState([]);
 
-  //   const { data, loading, error } = useFetch(
-  //     `/sub-categories?[filters][categories][id][$eq]=${catId}`
-  //   );
+  const { data, loading, error } = useFetch(
+    `/sub-categories?filters[categories][id][$eq]=${catId}`
+  );
 
-  const data: any = [];
+  console.log(data, "data");
 
   // const handleChange = (e) => {
   //   const value = e.target.value;
