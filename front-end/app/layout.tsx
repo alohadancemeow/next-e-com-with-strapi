@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 // import "./globals.css";
 import "./app.scss";
 
+import StoreProvider from "@/providers/store-provider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
@@ -25,15 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppRouterCacheProvider options={{ key: "css" }}>
-          <ThemeProvider theme={theme}>
-            <div className="app">
-              <Navbar />
-              {children}
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <StoreProvider>
+          <AppRouterCacheProvider options={{ key: "css" }}>
+            <ThemeProvider theme={theme}>
+              <div className="app">
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </StoreProvider>
       </body>
     </html>
   );

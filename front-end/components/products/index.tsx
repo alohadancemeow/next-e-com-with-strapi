@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import "./index.scss";
 import List from "../list";
 import useFetch from "@/hooks/use-fetch";
+import useFetchById from "@/hooks/use-fetch-by-id";
 
 type Props = {
   id: string;
@@ -13,9 +14,10 @@ const Products = ({ id }: Props) => {
   const catId = parseInt(id);
 
   const [maxPrice, setMaxPrice] = useState(1000);
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("desc");
   const [selectedSubCats, setSelectedSubCats] = useState<string[]>([]);
 
+  const { data: category } = useFetchById(`/products/${id}?populate=*`);
   const { data, loading, error } = useFetch(
     `/sub-categories?filters[categories][id][$eq]=${catId}`
   );
@@ -88,7 +90,13 @@ const Products = ({ id }: Props) => {
       <div className="right">
         <img
           className="catImg"
-          src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          src={
+            `${
+              process.env.NEXT_PUBLIC_UPLOAD_URL! +
+              category?.attributes?.img?.data?.attributes?.url
+            }` ||
+            "https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          }
           alt=""
         />
         <List

@@ -1,10 +1,9 @@
 "use client";
 
 import "./index.scss";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-// import { useSelector } from "react-redux";
-// import { removeItem, resetCart } from "../../redux/cartReducer";
-// import { useDispatch } from "react-redux";
+import { removeItem, resetCart } from "@/redux/cartReducer";
 // import { makeRequest } from "../../makeRequest";
 // import { loadStripe } from "@stripe/stripe-js";
 
@@ -42,8 +41,8 @@ const data = [
 ];
 
 const Cart = () => {
-  //   const products = useSelector((state) => state.cart.products);
-  //   const dispatch = useDispatch();
+  const products = useAppSelector((state) => state.cart.products);
+  const dispatch = useAppDispatch();
 
   const totalPrice = () => {
     let total = 0;
@@ -70,18 +69,12 @@ const Cart = () => {
   //     }
   //   };
 
-  const products: any = [];
-
   return (
     <div className="cart">
       <h1>Products in your cart</h1>
-      {data?.map((item: any) => (
+      {products?.map((item: any) => (
         <div className="item" key={item.id}>
-          <img
-            //   src={process.env.REACT_APP_UPLOAD_URL + item.img}
-            src={item.img}
-            alt=""
-          />
+          <img src={process.env.NEXT_PUBLIC_UPLOAD_URL + item.img} alt="" />
           <div className="details">
             <h1>{item.title}</h1>
             <p>{item.desc?.substring(0, 100)}</p>
@@ -91,7 +84,7 @@ const Cart = () => {
           </div>
           <DeleteOutlinedIcon
             className="delete"
-            // onClick={() => dispatch(removeItem(item.id))}
+            onClick={() => dispatch(removeItem(item.id))}
           />
         </div>
       ))}
@@ -104,10 +97,7 @@ const Cart = () => {
       >
         PROCEED TO CHECKOUT
       </button>
-      <span
-        className="reset"
-        //   onClick={() => dispatch(resetCart())}
-      >
+      <span className="reset" onClick={() => dispatch(resetCart())}>
         Reset Cart
       </span>
     </div>

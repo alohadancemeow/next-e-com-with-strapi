@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { makeRequest } from "./use-fetch";
 
-const useFetchProduct = (url: string) => {
+const useFetchById = (url: string) => {
   const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -23,4 +23,4 @@ const useFetchProduct = (url: string) => {
   return { data, loading, error };
 };
 
-export default useFetchProduct;
+export default useFetchById;

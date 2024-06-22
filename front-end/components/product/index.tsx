@@ -1,16 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import "./index.scss";
+import { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 
-import useFetchProduct from "@/hooks/use-fetch-product";
-
-// import { useParams } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { addToCart } from "../../redux/cartReducer";
+import useFetchById from "@/hooks/use-fetch-by-id";
+import { useAppDispatch } from "@/redux/store";
+import { addToCart } from "@/redux/cartReducer";
 
 type Props = {
   id: string;
@@ -20,10 +18,9 @@ const Product = ({ id }: Props) => {
   const [selectedImg, setSelectedImg] = useState("img");
   const [quantity, setQuantity] = useState(1);
 
-  //   const dispatch = useDispatch();
-  const { data, loading, error } = useFetchProduct(
-    `/products/${id}?populate=*`
-  );
+  const dispatch = useAppDispatch();
+
+  const { data, loading, error } = useFetchById(`/products/${id}?populate=*`);
 
   if (!data) return "loading product data";
 
@@ -31,6 +28,18 @@ const Product = ({ id }: Props) => {
     selectedImg !== "img2"
       ? data?.attributes?.[selectedImg]?.data?.attributes?.url
       : data?.attributes[selectedImg]?.data[0]?.attributes?.url;
+
+  const handleAddToCart = () =>
+    dispatch(
+      addToCart({
+        id: data.id,
+        title: data.attributes.title,
+        desc: data.attributes.desc,
+        price: data.attributes.price,
+        img: data.attributes.img.data.attributes.url,
+        quantity,
+      })
+    );
 
   return (
     <div className="product">
@@ -80,23 +89,14 @@ const Product = ({ id }: Props) => {
                 -
               </button>
               {quantity}
-              <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
+              <button
+                disabled={loading}
+                onClick={() => setQuantity((prev) => prev + 1)}
+              >
+                +
+              </button>
             </div>
-            <button
-              className="add"
-              //   onClick={() =>
-              //     dispatch(
-              //       addToCart({
-              //         id: data.id,
-              //         title: data.attributes.title,
-              //         desc: data.attributes.desc,
-              //         price: data.attributes.price,
-              //         img: data.attributes.img.data.attributes.url,
-              //         quantity,
-              //       })
-              //     )
-              //   }
-            >
+            <button className="add" onClick={handleAddToCart}>
               <AddShoppingCartIcon /> ADD TO CART
             </button>
             <div className="links">

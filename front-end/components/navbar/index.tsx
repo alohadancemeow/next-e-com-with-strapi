@@ -11,14 +11,11 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import Cart from "../cart";
-
-// import { useSelector } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  //   const products = useSelector((state) => state.cart.products);
-
-  const products = [];
+  const products = useAppSelector((state) => state.cart.products);
 
   return (
     <div className="navbar">
