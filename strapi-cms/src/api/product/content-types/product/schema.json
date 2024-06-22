@@ -47,12 +47,6 @@
       "type": "boolean",
       "default": false
     },
-    "catrgories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::catrgory.catrgory",
-      "inversedBy": "products"
-    },
     "sub_categories": {
       "type": "relation",
       "relation": "manyToMany",
@@ -66,6 +60,12 @@
         "featured",
         "trending"
       ]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "products"
     }
   }
 }

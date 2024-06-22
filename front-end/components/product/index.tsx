@@ -6,21 +6,31 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 
-// import useFetch from "../../hooks/useFetch";
+import useFetchProduct from "@/hooks/use-fetch-product";
+
 // import { useParams } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 // import { addToCart } from "../../redux/cartReducer";
 
-const Product = () => {
-  //   const id = useParams().id;
+type Props = {
+  id: string;
+};
+
+const Product = ({ id }: Props) => {
   const [selectedImg, setSelectedImg] = useState("img");
   const [quantity, setQuantity] = useState(1);
 
   //   const dispatch = useDispatch();
-  //   const { data, loading, error } = useFetch(`/products/${id}?populate=*`);
+  const { data, loading, error } = useFetchProduct(
+    `/products/${id}?populate=*`
+  );
 
-  const loading = false;
-  const data: any = [];
+  if (!data) return "loading product data";
+
+  const imageUrl =
+    selectedImg !== "img2"
+      ? data?.attributes?.[selectedImg]?.data?.attributes?.url
+      : data?.attributes[selectedImg]?.data[0]?.attributes?.url;
 
   return (
     <div className="product">
@@ -31,31 +41,28 @@ const Product = () => {
           <div className="left">
             <div className="images">
               <img
-                // src={
-                //   process.env.REACT_APP_UPLOAD_URL +
-                //   data?.attributes?.img?.data?.attributes?.url
-                // }
-                src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt=""
-                // onClick={(e) => setSelectedImg("img")}
+                src={
+                  process.env.NEXT_PUBLIC_UPLOAD_URL! +
+                  data?.attributes?.img?.data?.attributes?.url
+                }
+                // src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="image"
+                onClick={(e) => setSelectedImg("img")}
               />
               <img
-                // src={
-                //   process.env.REACT_APP_UPLOAD_URL +
-                //   data?.attributes?.img2?.data?.attributes?.url
-                // }
-                src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={
+                  process.env.NEXT_PUBLIC_UPLOAD_URL! +
+                  data?.attributes?.img2?.data[0]?.attributes?.url
+                }
+                // src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
-                // onClick={(e) => setSelectedImg("img2")}
+                onClick={(e) => setSelectedImg("img2")}
               />
             </div>
             <div className="mainImg">
               <img
-                // src={
-                //   process.env.REACT_APP_UPLOAD_URL +
-                //   data?.attributes[selectedImg]?.data?.attributes?.url
-                // }
-                src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={process.env.NEXT_PUBLIC_UPLOAD_URL! + imageUrl}
+                // src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
               />
             </div>

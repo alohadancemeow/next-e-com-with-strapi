@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { makeRequest } from "./use-fetch";
 
-export const makeRequest = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL as string,
-  headers: {
-    Authorization: "bearer " + (process.env.NEXT_PUBLIC_API_TOKEN as string),
-  },
-});
-
-const useFetch = (url: string) => {
-  const [data, setData] = useState<any[]>([]);
+const useFetchProduct = (url: string) => {
+  const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -30,4 +23,4 @@ const useFetch = (url: string) => {
   return { data, loading, error };
 };
 
-export default useFetch;
+export default useFetchProduct;

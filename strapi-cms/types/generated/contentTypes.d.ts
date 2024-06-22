@@ -788,12 +788,12 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiCatrgoryCatrgory extends Schema.CollectionType {
-  collectionName: 'catrgories';
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
   info: {
-    singularName: 'catrgory';
-    pluralName: 'catrgories';
-    displayName: 'catrgory';
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
   };
   options: {
     draftAndPublish: true;
@@ -803,12 +803,12 @@ export interface ApiCatrgoryCatrgory extends Schema.CollectionType {
     desc: Attribute.Text;
     img: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     products: Attribute.Relation<
-      'api::catrgory.catrgory',
+      'api::category.category',
       'manyToMany',
       'api::product.product'
     >;
     sub_categories: Attribute.Relation<
-      'api::catrgory.catrgory',
+      'api::category.category',
       'manyToMany',
       'api::sub-category.sub-category'
     >;
@@ -816,13 +816,13 @@ export interface ApiCatrgoryCatrgory extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::catrgory.catrgory',
+      'api::category.category',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::catrgory.catrgory',
+      'api::category.category',
       'oneToOne',
       'admin::user'
     > &
@@ -848,17 +848,17 @@ export interface ApiProductProduct extends Schema.CollectionType {
     img2: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     price: Attribute.Decimal;
     isNew: Attribute.Boolean & Attribute.DefaultTo<false>;
-    catrgories: Attribute.Relation<
-      'api::product.product',
-      'manyToMany',
-      'api::catrgory.catrgory'
-    >;
     sub_categories: Attribute.Relation<
       'api::product.product',
       'manyToMany',
       'api::sub-category.sub-category'
     >;
     type: Attribute.Enumeration<['normal', 'featured', 'trending']>;
+    categories: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::category.category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -895,10 +895,10 @@ export interface ApiSubCategorySubCategory extends Schema.CollectionType {
       'manyToMany',
       'api::product.product'
     >;
-    catrgories: Attribute.Relation<
+    categories: Attribute.Relation<
       'api::sub-category.sub-category',
       'manyToMany',
-      'api::catrgory.catrgory'
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -936,7 +936,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::catrgory.catrgory': ApiCatrgoryCatrgory;
+      'api::category.category': ApiCategoryCategory;
       'api::product.product': ApiProductProduct;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;
     }

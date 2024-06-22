@@ -21,11 +21,11 @@
       "target": "api::product.product",
       "mappedBy": "sub_categories"
     },
-    "catrgories": {
+    "categories": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::catrgory.catrgory",
-      "inversedBy": "sub_categories"
+      "target": "api::category.category",
+      "mappedBy": "sub_categories"
     }
   }
 }

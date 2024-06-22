@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Card = ({ item }: Props) => {
-  console.log(item);
+  // console.log(item);
 
   return (
     <Link className="link" href={`/product/${item.id}`}>

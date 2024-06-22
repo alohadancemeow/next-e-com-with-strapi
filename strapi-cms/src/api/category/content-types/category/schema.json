@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "catrgories",
+  "collectionName": "categories",
   "info": {
-    "singularName": "catrgory",
-    "pluralName": "catrgories",
-    "displayName": "catrgory"
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "category"
   },
   "options": {
     "draftAndPublish": true
@@ -31,13 +31,13 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::product.product",
-      "mappedBy": "catrgories"
+      "inversedBy": "categories"
     },
     "sub_categories": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::sub-category.sub-category",
-      "mappedBy": "catrgories"
+      "inversedBy": "categories"
     }
   }
 }
