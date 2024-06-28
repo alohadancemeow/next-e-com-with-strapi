@@ -4,8 +4,8 @@ type Props = {
   params: { id: string };
 };
 
-const ProductsPage = ({ params }: Props) => {
+const CategoryPage = ({ params }: Props) => {
   return <Products id={params.id} />;
 };
 
-export default ProductsPage;
+export default CategoryPage;

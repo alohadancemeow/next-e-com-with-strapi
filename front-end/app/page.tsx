@@ -7,9 +7,15 @@ export default function Home() {
   return (
     <div className="home">
       <Slider />
-      <FeaturedProducts type="featured" />
-      <Categories />
-      <FeaturedProducts type="trending" />
+      <div id="featured">
+        <FeaturedProducts type="featured" />
+      </div>
+      <div id="category">
+        <Categories />
+      </div>
+      <div id="trending">
+        <FeaturedProducts type="trending" />
+      </div>
       <Contact />
     </div>
   );

@@ -794,6 +794,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -801,7 +802,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     desc: Attribute.Text;
-    img: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     products: Attribute.Relation<
       'api::category.category',
       'manyToMany',
@@ -812,6 +812,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'manyToMany',
       'api::sub-category.sub-category'
     >;
+    cover_image: Attribute.JSON & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -876,8 +877,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     desc: Attribute.Text;
-    img: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    img2: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     price: Attribute.Decimal;
     isNew: Attribute.Boolean & Attribute.DefaultTo<false>;
     sub_categories: Attribute.Relation<
@@ -891,6 +890,8 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    thumbnail: Attribute.JSON & Attribute.Required;
+    images: Attribute.JSON & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

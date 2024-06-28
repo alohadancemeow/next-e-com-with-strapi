@@ -41,7 +41,7 @@ const Footer = () => {
       </div>
       <div className="bottom">
         <div className="left">
-          <span className="logo">Lamastore</span>
+          <span className="logo">Store</span>
           <span className="copyright">
             © Copyright 2023. All Rights Reserved
           </span>

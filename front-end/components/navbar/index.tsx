@@ -20,57 +20,34 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="wrapper">
-        <div className="left">
-          <div className="item">
-            <img src="/img/en.png" alt="" />
-            <KeyboardArrowDownIcon />
-          </div>
-          <div className="item">
-            <span>USD</span>
-            <KeyboardArrowDownIcon />
-          </div>
-          <div className="item">
-            <Link className="link" href="/products/1">
-              Women
-            </Link>
-          </div>
-          <div className="item">
-            <Link className="link" href="/products/2">
-              Men
-            </Link>
-          </div>
-          <div className="item">
-            <Link className="link" href="/products/3">
-              Children
-            </Link>
-          </div>
-        </div>
-        <div className="center">
+        <div
+          style={{
+            fontSize: "30px",
+            letterSpacing: "2px",
+            fontWeight: "bold",
+          }}
+        >
           <Link className="link" href="/">
             Store
           </Link>
         </div>
         <div className="right">
           <div className="item">
-            <Link className="link" href="/">
-              Homepage
+            <Link className="link" href="#featured">
+              Featured
             </Link>
           </div>
           <div className="item">
-            <Link className="link" href="/">
-              About
+            <Link className="link" href="#category">
+              Categories
             </Link>
           </div>
           <div className="item">
-            <Link className="link" href="/">
-              Contact
+            <Link className="link" href="#trending">
+              Trendings
             </Link>
           </div>
-          <div className="item">
-            <Link className="link" href="/">
-              Stores
-            </Link>
-          </div>
+
           <div className="icons">
             <SearchIcon />
             <PersonOutlineOutlinedIcon />

@@ -17,10 +17,14 @@ const Products = ({ id }: Props) => {
   const [sort, setSort] = useState("desc");
   const [selectedSubCats, setSelectedSubCats] = useState<string[]>([]);
 
-  const { data: category } = useFetchById(`/products/${id}?populate=*`);
-  const { data, loading, error } = useFetch(
-    `/sub-categories?filters[categories][id][$eq]=${catId}`
-  );
+  const { data: category } = useFetchById(`/categories/${id}`);
+  const {
+    data: subCategories,
+    loading,
+    error,
+  } = useFetch(`/sub-categories?filters[categories][id][$eq]=${catId}`);
+
+  console.log(category, "category");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -37,8 +41,8 @@ const Products = ({ id }: Props) => {
     <div className="products">
       <div className="left">
         <div className="filterItem">
-          <h2>Product Categories</h2>
-          {data?.map((item: any) => (
+          <h2>{category?.attributes?.title || "product category"}</h2>
+          {subCategories?.map((item: any) => (
             <div className="inputItem" key={item.id}>
               <input
                 type="checkbox"
@@ -91,10 +95,7 @@ const Products = ({ id }: Props) => {
         <img
           className="catImg"
           src={
-            `${
-              process.env.NEXT_PUBLIC_UPLOAD_URL! +
-              category?.attributes?.img?.data?.attributes?.url
-            }` ||
+            `${category?.attributes?.cover_image?.url}` ||
             "https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
           }
           alt=""

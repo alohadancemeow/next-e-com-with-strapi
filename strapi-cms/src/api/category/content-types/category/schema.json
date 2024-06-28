@@ -4,7 +4,8 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "category"
+    "displayName": "category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,16 +18,6 @@
     "desc": {
       "type": "text"
     },
-    "img": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
-    },
     "products": {
       "type": "relation",
       "relation": "manyToMany",
@@ -38,6 +29,10 @@
       "relation": "manyToMany",
       "target": "api::sub-category.sub-category",
       "inversedBy": "categories"
+    },
+    "cover_image": {
+      "type": "json",
+      "required": true
     }
   }
 }
